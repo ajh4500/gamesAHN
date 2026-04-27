@@ -37,28 +37,6 @@ ui.hideEndActions = function() {
     $('.end-actions').hide();
 };
 
-/*
- * switchs the view on the UI depending on who's turn it switchs
- * @param turn [String]: the player to switch the view to
- */
-ui.switchViewTo = function(turn) {
-
-    //helper function for async calling
-    function _switch(_turn) {
-        ui.currentView = "#" + _turn;
-        $(ui.currentView).fadeIn("fast");
-
-        if(_turn === "ai")
-            ui.startRobotFlickering();
-        else
-            ui.stopRobotFlickering();
-
-        if(_turn === "won" || _turn === "lost" || _turn === "draw")
-            ui.showEndActions();
-        else
-            ui.hideEndActions();
-    }
-
     if(ui.intialControlsVisible) {
         //if the game is just starting
         ui.intialControlsVisible = false;
