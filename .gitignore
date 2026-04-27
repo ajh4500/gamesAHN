@@ -1,5 +1,7 @@
 backend/node_modules/
 backend/users.db
+gamesbyahnprog/backend/node_modules/
+gamesbyahnprog/backend/users.db
 .env
 .env.*
 .vscode/
