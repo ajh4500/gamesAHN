@@ -86,6 +86,9 @@ ui.switchViewTo = function(turn) {
             }
         });
     }
+    else if(!ui.currentView) {
+        _switch(turn);
+    }
     else {
         //if the game is in an intermediate state
         $(ui.currentView).fadeOut({
