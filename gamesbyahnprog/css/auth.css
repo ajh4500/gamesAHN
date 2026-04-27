@@ -96,6 +96,12 @@
     background: #0f1115;
     color: white;
     font-size: 1.1rem;
+<<<<<<< HEAD
+=======
+    border-radius:16px;
+
+
+>>>>>>> origin/main
 }
 
 .auth-submit {
