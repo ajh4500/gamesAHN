@@ -38,22 +38,6 @@ ui.hideEndActions = function() {
 };
 
 /*
- * hides the setup controls once the game starts and keeps the
- * board clear of intermediate turn messages
- */
-ui.enterRunningState = function() {
-    ui.hideEndActions();
-    ui.stopRobotFlickering();
-    $('.ingame').hide();
-    ui.currentView = "";
-
-    if(ui.intialControlsVisible) {
-        ui.intialControlsVisible = false;
-        $('.intial').fadeOut("slow");
-    }
-};
-
-/*
  * switchs the view on the UI depending on who's turn it switchs
  * @param turn [String]: the player to switch the view to
  */
@@ -85,9 +69,6 @@ ui.switchViewTo = function(turn) {
                 _switch(turn);
             }
         });
-    }
-    else if(!ui.currentView) {
-        _switch(turn);
     }
     else {
         //if the game is in an intermediate state

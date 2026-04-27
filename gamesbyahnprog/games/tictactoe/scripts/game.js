@@ -151,9 +151,12 @@ var Game = function(autoPlayer) {
         }
         else {
             //the game is still running
-            ui.enterRunningState();
+            if(this.currentState.turn === "X") {
+                ui.switchViewTo("human");
+            }
+            else {
+                ui.switchViewTo("ai");
 
-            if(this.currentState.turn === "O") {
                 //notify the AI player its turn has come up
                 this.ai.notify("O");
             }
