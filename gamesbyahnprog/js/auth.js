@@ -1,10 +1,6 @@
 (function () {
     var AUTH_STORAGE_KEY = "gamesbyahn_user";
-<<<<<<< HEAD
     var API_BASE = window.API_BASE || "";
-=======
-    var API_BASE = window.API_BASE;
->>>>>>> origin/main
 
     function getUser() {
         var raw = localStorage.getItem(AUTH_STORAGE_KEY);
@@ -118,13 +114,10 @@
     }
 
     async function submitAuth(url, payload) {
-<<<<<<< HEAD
         if (!API_BASE) {
             throw new Error("API base URL is not configured.");
         }
 
-=======
->>>>>>> origin/main
         var response = await fetch(API_BASE + url, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -139,21 +132,13 @@
     }
 
     function goHome() {
-<<<<<<< HEAD
         var isHome = /\/index\.html$/i.test(window.location.pathname) || window.location.pathname === "/" || window.location.pathname === "";
-=======
-        var isHome = /GAMESBYAHN\.html$/i.test(window.location.pathname) || window.location.pathname === "/" || window.location.pathname === "";
->>>>>>> origin/main
         if (isHome) {
             window.location.reload();
             return;
         }
 
-<<<<<<< HEAD
         window.location.href = window.location.pathname.includes("/games/") ? "../../index.html" : "index.html";
-=======
-        window.location.href = window.location.pathname.includes("/games/") ? "../../GAMESBYAHN.html" : "GAMESBYAHN.html";
->>>>>>> origin/main
     }
 
     function bindEvents() {

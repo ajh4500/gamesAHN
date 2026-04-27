@@ -40,14 +40,11 @@ body {
     transition: transform 0.25s ease;
 }
 
-<<<<<<< HEAD
 .game-card--placeholder {
     cursor: default;
     opacity: 0.35;
 }
 
-=======
->>>>>>> origin/main
 .game-card img {
     width: 100%;
     height: 100%;
@@ -60,24 +57,18 @@ body {
     transform: scale(1.04);
 }
 
-<<<<<<< HEAD
 .game-card--placeholder:hover {
     transform: none;
 }
 
-=======
->>>>>>> origin/main
 .game-card:hover img {
     transform: scale(1.06);
 }
 
-<<<<<<< HEAD
 .game-card--placeholder:hover img {
     transform: none;
 }
 
-=======
->>>>>>> origin/main
 .game-name {
     position: absolute;
     bottom: 1rem;

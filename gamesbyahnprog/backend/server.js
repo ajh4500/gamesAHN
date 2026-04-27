@@ -1,17 +1,13 @@
 const express = require("express");
 const cors = require("cors");
-<<<<<<< HEAD
 const path = require("path");
 const bcrypt = require("bcrypt");
 const Redis = require("ioredis");
 const sqlite3 = require("sqlite3").verbose();
-=======
->>>>>>> origin/main
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN;
-<<<<<<< HEAD
 const REDIS_URL = process.env.REDIS_URL;
 const DB_PATH = process.env.DB_PATH || path.join(__dirname, "users.db");
 const SALT_ROUNDS = 10;
@@ -39,25 +35,13 @@ function isGithubPagesOrigin(origin) {
 
   try {
     return /\.github\.io$/i.test(new URL(origin).hostname);
-=======
-
-app.use(express.json());
-
-function isGithubPagesOrigin(origin) {
-  if (typeof origin !== "string") return false;
-  try {
-    return /\.github\.io$/.test(new URL(origin).hostname);
->>>>>>> origin/main
   } catch {
     return false;
   }
 }
 
-<<<<<<< HEAD
 const configuredFrontendOrigin = normalizeOrigin(FRONTEND_ORIGIN);
 
-=======
->>>>>>> origin/main
 app.use(cors({
   origin(origin, callback) {
     const allowedOrigins = [
@@ -65,20 +49,12 @@ app.use(cors({
       "http://127.0.0.1:5173",
       "http://localhost:5500",
       "http://127.0.0.1:5500",
-<<<<<<< HEAD
       "https://ajh4500.github.io",
       "null"
     ];
 
     if (configuredFrontendOrigin) {
       allowedOrigins.push(configuredFrontendOrigin);
-=======
-      "null"
-    ];
-
-    if (FRONTEND_ORIGIN) {
-      allowedOrigins.push(FRONTEND_ORIGIN);
->>>>>>> origin/main
     }
 
     const isGithubPages = isGithubPagesOrigin(origin);
@@ -93,7 +69,6 @@ app.use(cors({
   allowedHeaders: ["Content-Type"]
 }));
 
-<<<<<<< HEAD
 db.serialize(() => {
   db.run(`
     CREATE TABLE IF NOT EXISTS users (
@@ -178,16 +153,11 @@ async function createUser(username, email, passwordHash) {
     password_hash: passwordHash
   };
 }
-=======
-// 🧠 SIMPLE IN-MEMORY DATABASE
-const users = [];
->>>>>>> origin/main
 
 app.get("/", (req, res) => {
   res.send("Backend is running.");
 });
 
-<<<<<<< HEAD
 app.post("/signup", async (req, res) => {
   const { username, email, password } = req.body;
   const trimmedUsername = typeof username === "string" ? username.trim() : "";
@@ -246,65 +216,12 @@ app.post("/login", async (req, res) => {
     console.error("Login failed:", error);
     return res.status(500).json({ error: "Could not log in." });
   }
-=======
-// SIGNUP
-app.post("/signup", (req, res) => {
-  const { username, email, password } = req.body;
-
-  if (!username || !email || !password) {
-    return res.status(400).json({ error: "All fields are required." });
-  }
-
-  const exists = users.find(u => u.email === email);
-  if (exists) {
-    return res.status(400).json({ error: "Email already exists." });
-  }
-
-  const user = { id: Date.now(), username, email, password };
-  users.push(user);
-
-  res.json({
-    message: "Signup successful.",
-    user: {
-      id: user.id,
-      username,
-      email
-    }
-  });
-});
-
-// LOGIN
-app.post("/login", (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ error: "Email and password are required." });
-  }
-
-  const user = users.find(u => u.email === email && u.password === password);
-
-  if (!user) {
-    return res.status(400).json({ error: "Invalid email or password." });
-  }
-
-  res.json({
-    message: "Login successful.",
-    user: {
-      id: user.id,
-      username: user.username,
-      email: user.email
-    }
-  });
->>>>>>> origin/main
 });
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-<<<<<<< HEAD
   console.log(redis ? "Using Render Key Value via REDIS_URL" : `Using SQLite database at ${DB_PATH}`);
   if (configuredFrontendOrigin) {
     console.log(`Allowed frontend origin: ${configuredFrontendOrigin}`);
   }
-=======
->>>>>>> origin/main
 });
