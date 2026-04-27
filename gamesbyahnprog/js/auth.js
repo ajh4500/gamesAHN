@@ -1,8 +1,6 @@
 (function () {
     var AUTH_STORAGE_KEY = "gamesbyahn_user";
-    var API_BASE = window.API_BASE || (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
-        ? "http://localhost:5001"
-        : "https://YOUR-RENDER-BACKEND.onrender.com");
+    var API_BASE = window.API_BASE;
 
     function getUser() {
         var raw = localStorage.getItem(AUTH_STORAGE_KEY);
@@ -201,4 +199,5 @@
         buildModal();
         bindEvents();
     });
+    
 })();
