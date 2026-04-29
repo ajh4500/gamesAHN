@@ -1,9 +1,9 @@
 .solitaire-container {
-    width: min(100%, 900px);
+    width: min(100%, 1040px);
 }
 
 .game-container {
-    width: min(100%, 900px);
+    width: min(100%, 1040px);
     color: white;
 }
 
@@ -78,7 +78,7 @@
 .left-piles,
 .foundations {
     display: flex;
-    gap: 12px;
+    gap: 16px;
 }
 
 .pile-group {
@@ -101,7 +101,7 @@
     left: 50%;
     transform: translateX(-50%);
     color: white;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .tableau-area {
@@ -112,7 +112,7 @@
 
 .tableau-piles {
     display: flex;
-    gap: 12px;
+    gap: 16px;
     justify-content: space-between;
 }
 
@@ -124,8 +124,8 @@
 }
 
 .pile {
-    width: 75px;
-    height: 105px;
+    width: 88px;
+    height: 123px;
     border-radius: 5px;
     position: relative;
     background: rgba(255, 255, 255, 0.1);
@@ -152,8 +152,8 @@
 }
 
 .card {
-    width: 75px;
-    height: 105px;
+    width: 88px;
+    height: 123px;
     border-radius: 4px;
     position: absolute;
     top: 0;
@@ -194,7 +194,7 @@
 .card .bottom {
     display: flex;
     flex-direction: column;
-    font-size: 11px;
+    font-size: 13px;
     line-height: 1.1;
 }
 
@@ -207,7 +207,7 @@
     justify-content: center;
     align-items: center;
     flex-grow: 1;
-    font-size: 22px;
+    font-size: 27px;
 }
 
 .card .bottom {
@@ -233,7 +233,7 @@
 
 .waste {
     position: relative;
-    width: 130px;
+    width: 156px;
 }
 
 .waste .card {
@@ -247,12 +247,12 @@
 }
 
 .waste .card:nth-child(2) {
-    left: 18px;
+    left: 22px;
     z-index: 2;
 }
 
 .waste .card:nth-child(3) {
-    left: 36px;
+    left: 44px;
     z-index: 3;
 }
 
@@ -308,6 +308,10 @@
 
 .win-stats {
     margin: 15px 0;
+}
+#stock{
+    font-size:14px;
+
 }
 
 @media (max-width: 768px) {
