@@ -4,83 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solitaire</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/auth.css">
+    <link rel="stylesheet" href="../../css/game-page.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
-<body>
-    <div class="game-container">
-        <!-- Header -->
-        <div class="header">
-            <h1 class="game-title">Solitaire</h1>
-            <div class="game-info">
-                <div class="score-time">
-                    <span>Score: <strong id="score-value">0</strong></span>
-                    <span>Time: <strong id="time-value">00:00</strong></span>
-                </div>
-                <div class="controls">
-                    <button id="new-game" class="btn">New Game</button>
-                    <button id="hint" class="btn">Hint</button>
-                </div>
-            </div>
+<body class="game-page">
+    <header>
+        <div class="logo" aria-label="GAME AHN">
+            <span class="logo-top">AHN</span>
+            <span class="logo-main" aria-hidden="true">
+                <span class="logo-letter letter-g">G</span>
+                <span class="logo-letter letter-a">A</span>
+                <span class="logo-letter letter-m">M</span>
+                <span class="logo-letter letter-e">E</span>
+            </span>
         </div>
 
-        <!-- Game Board -->
-        <div class="game-board">
-            <!-- Stock, Waste, Foundations -->
-            <div class="top-area">
-                <div class="left-piles">
-                    <div class="pile-group">
-                        <div class="pile stock" id="stock">
-                            <div class="card back"></div>
+        <nav>
+            <a href="#" data-auth-action="login">Log in</a>
+            <a href="#" data-auth-action="signup">Sign Up</a>
+        </nav>
+    </header>
+
+    <main class="game-page-layout">
+        <section class="game-panel">
+            <div class="main-container solitaire-container">
+                <div class="game-container">
+                    <div class="solitaire-header">
+                        <h1 class="game-title">Solitaire</h1>
+                        <div class="game-info">
+                            <div class="score-time">
+                                <span>Score: <strong id="score-value">0</strong></span>
+                                <span>Time: <strong id="time-value">00:00</strong></span>
+                            </div>
+                            <button id="hint" class="btn" type="button">Hint</button>
                         </div>
-                        <span>Stock</span>
                     </div>
-                    <div class="pile-group">
-                        <div class="pile waste" id="waste"></div>
-                        <span>Waste</span>
+
+                    <div class="game-board">
+                        <div class="top-area">
+                            <div class="left-piles">
+                                <div class="pile-group">
+                                    <div class="pile stock" id="stock">
+                                        <div class="card back"></div>
+                                    </div>
+                                    <span>Stock</span>
+                                </div>
+                                <div class="pile-group">
+                                    <div class="pile waste" id="waste"></div>
+                                    <span>Waste</span>
+                                </div>
+                            </div>
+
+                            <div class="foundations">
+                                <div class="pile foundation" id="foundation-0"></div>
+                                <div class="pile foundation" id="foundation-1"></div>
+                                <div class="pile foundation" id="foundation-2"></div>
+                                <div class="pile foundation" id="foundation-3"></div>
+                                <span>Foundations</span>
+                            </div>
+                        </div>
+
+                        <div class="tableau-area">
+                            <div class="tableau-piles">
+                                <div class="pile tableau tableau-pile" id="tableau-0"></div>
+                                <div class="pile tableau tableau-pile" id="tableau-1"></div>
+                                <div class="pile tableau tableau-pile" id="tableau-2"></div>
+                                <div class="pile tableau tableau-pile" id="tableau-3"></div>
+                                <div class="pile tableau tableau-pile" id="tableau-4"></div>
+                                <div class="pile tableau tableau-pile" id="tableau-5"></div>
+                                <div class="pile tableau tableau-pile" id="tableau-6"></div>
+                            </div>
+                            <span>Tableau</span>
+                        </div>
+                    </div>
+
+                    <div id="message" class="message"></div>
+
+                    <div id="win-screen" class="win-screen hidden">
+                        <div class="win-content">
+                            <h2>You won !</h2>
+                            <div class="win-stats">
+                                <p>Score: <strong id="final-score">0</strong></p>
+                                <p>Time: <strong id="final-time">00:00</strong></p>
+                            </div>
+                            <button id="play-again" class="btn" type="button">Play Again</button>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="foundations">
-                    <div class="pile foundation" id="foundation-0"></div>
-                    <div class="pile foundation" id="foundation-1"></div>
-                    <div class="pile foundation" id="foundation-2"></div>
-                    <div class="pile foundation" id="foundation-3"></div>
-                    <span>Foundations</span>
-                </div>
-            </div>
 
-            <!-- Tableau -->
-            <div class="tableau-area">
-                <div class="tableau-piles">
-                    <div class="pile tableau tableau-pile" id="tableau-0"></div>
-                    <div class="pile tableau tableau-pile" id="tableau-1"></div>
-                    <div class="pile tableau tableau-pile" id="tableau-2"></div>
-                    <div class="pile tableau tableau-pile" id="tableau-3"></div>
-                    <div class="pile tableau tableau-pile" id="tableau-4"></div>
-                    <div class="pile tableau tableau-pile" id="tableau-5"></div>
-                    <div class="pile tableau tableau-pile" id="tableau-6"></div>
+                <div class="control">
+                    <div class="ingame" id="won">You won !</div>
+                    <div class="ingame" id="lost">You lost !</div>
+                    <div class="ingame" id="draw">It's a Draw</div>
+
+                    <div class="end-actions">
+                        <a class="game-action-button" href="../../../index.html">Home</a>
+                        <button class="game-action-button restart-button" id="new-game" type="button">Restart</button>
+                    </div>
                 </div>
-                <span>Tableau</span>
             </div>
+        </section>
+    </main>
+
+    <aside class="page-side-games">
+        <h2 class="side-games-title">More Games</h2>
+        <div class="side-games-grid">
+            <a class="side-game-card" href="../tictactoe/tictacindex.html">
+                <span class="side-game-name">Tic-Tac-Toe</span>
+                <span class="side-game-status">Ready to play</span>
+            </a>
+            <a class="side-game-card" href="../connect4/c4index.html">
+                <span class="side-game-name">Connect-4</span>
+                <span class="side-game-status">Ready to play</span>
+            </a>
+            <a class="side-game-card" href="../checkers/checkindex.html">
+                <span class="side-game-name">Checkers</span>
+                <span class="side-game-status">Ready to play</span>
+            </a>
+            <a class="side-game-card current" href="./solindex.html">
+                <span class="side-game-name">Solitaire</span>
+                <span class="side-game-status">Playing now</span>
+            </a>
         </div>
+    </aside>
 
-        <!-- Messages -->
-        <div id="message" class="message"></div>
-
-        <!-- Win Screen -->
-        <div id="win-screen" class="win-screen hidden">
-            <div class="win-content">
-                <h2>You Won! 🎉</h2>
-                <div class="win-stats">
-                    <p>Score: <strong id="final-score">0</strong></p>
-                    <p>Time: <strong id="final-time">00:00</strong></p>
-                </div>
-                <button id="play-again" class="btn">Play Again</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="data-structures.js"></script>
-    <script src="game.js"></script>
+    <script src="./js/data-structures.js"></script>
+    <script src="./js/game.js"></script>
+    <script src="../../js/config.js"></script>
+    <script src="../../js/auth.js"></script>
 </body>
 </html>

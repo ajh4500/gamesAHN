@@ -1,39 +1,23 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Arial', sans-serif;
-    background: green;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 5px;
-    padding-top: 10px;
+.solitaire-container {
+    width: min(100%, 900px);
 }
 
 .game-container {
-    background: green;
-    max-width: 900px;
-    width: 100%;
+    width: min(100%, 900px);
+    color: white;
 }
 
-/* Header - Compact layout */
-.header {
+.solitaire-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
     padding: 12px 15px;
-    background: green;
-    border-radius: 8px;
     color: white;
 }
 
 .game-title {
+    margin: 0;
     font-size: 31px;
     color: white;
 }
@@ -48,27 +32,24 @@ body {
 .score-time {
     display: flex;
     gap: 15px;
-    font-size: 14px;
+    font-size: 17px;
     color: white;
 }
 
-.score-time strong {
+.score-time strong,
+.win-stats strong {
     color: yellow;
-}
-
-.controls {
-    display: flex;
-    gap: 6px;
+    font-size: 17px;
 }
 
 .btn {
-    background: blue;
+    background: green;
     color: white;
     border: none;
     padding: 6px 12px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 17px;
     transition: background 0.3s;
 }
 
@@ -81,14 +62,12 @@ body {
     cursor: not-allowed;
 }
 
-/* Game Board - Compact spacing */
 .game-board {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-/* Top Area */
 .top-area {
     display: flex;
     justify-content: space-between;
@@ -96,9 +75,10 @@ body {
     margin-bottom: 5px;
 }
 
-.left-piles {
+.left-piles,
+.foundations {
     display: flex;
-    gap: 15px;
+    gap: 12px;
 }
 
 .pile-group {
@@ -110,14 +90,7 @@ body {
     font-size: 12px;
 }
 
-/* #stock{
-    color: #d32f2f;
-    background-color: #d32f2f;
-} */
-
 .foundations {
-    display: flex;
-    gap: 12px;
     align-items: flex-start;
     position: relative;
 }
@@ -131,7 +104,6 @@ body {
     font-size: 12px;
 }
 
-/* Tableau Area */
 .tableau-area {
     display: flex;
     flex-direction: column;
@@ -151,7 +123,6 @@ body {
     margin-top: 3px;
 }
 
-/* Piles */
 .pile {
     width: 75px;
     height: 105px;
@@ -170,7 +141,6 @@ body {
     background: rgba(255, 235, 59, 0.1);
 }
 
-/* Foundation Piles - Locked cards */
 .foundation .card {
     cursor: default;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -181,7 +151,6 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Cards */
 .card {
     width: 75px;
     height: 105px;
@@ -205,8 +174,9 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-.back {
-    background: linear-gradient(135deg, red, #b71c1c);
+.back,
+.back-card {
+    background: linear-gradient(135deg, green, green);
     border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
@@ -220,12 +190,16 @@ body {
     border: 1px solid #e0e0e0;
 }
 
-.card .top {
+.card .top,
+.card .bottom {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     font-size: 11px;
     line-height: 1.1;
+}
+
+.card .top {
+    align-items: flex-start;
 }
 
 .card .center {
@@ -237,15 +211,10 @@ body {
 }
 
 .card .bottom {
-    display: flex;
-    flex-direction: column;
     align-items: flex-end;
     transform: rotate(180deg);
-    font-size: 11px;
-    line-height: 1.1;
 }
 
-/* Tableau Cards - Red back */
 .tableau .card.face-down {
     background: linear-gradient(135deg, blue, green);
     border: 2px solid grey;
@@ -262,7 +231,6 @@ body {
     display: none;
 }
 
-/* Waste Cards */
 .waste {
     position: relative;
     width: 130px;
@@ -288,7 +256,6 @@ body {
     z-index: 3;
 }
 
-/* Dragging */
 .card.dragging {
     opacity: 0.9;
     transform: rotate(3deg) scale(1.05);
@@ -296,7 +263,6 @@ body {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Messages */
 .message {
     position: fixed;
     top: 50%;
@@ -312,13 +278,9 @@ body {
     display: none;
 }
 
-/* Win Screen */
 .win-screen {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: rgba(0, 0, 0, 0.9);
     display: flex;
     justify-content: center;
@@ -348,40 +310,31 @@ body {
     margin: 15px 0;
 }
 
-.win-stats strong {
-    color: #ffeb3b;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
-    .header {
+    .solitaire-header {
         flex-direction: column;
         gap: 10px;
         text-align: center;
     }
-    
+
     .game-info {
         align-items: center;
     }
-    
-    .pile {
-        width: 65px;
-        height: 91px;
-    }
-    
+
+    .pile,
     .card {
         width: 65px;
         height: 91px;
     }
-    
+
     .waste {
         width: 110px;
     }
-    
+
     .waste .card:nth-child(2) {
         left: 15px;
     }
-    
+
     .waste .card:nth-child(3) {
         left: 30px;
     }
