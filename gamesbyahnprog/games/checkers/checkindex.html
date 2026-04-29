@@ -1,41 +1,79 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkers</title>
-  <link rel="stylesheet" href="./css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkers</title>
+    <link rel="stylesheet" href="../../css/header.css">
+    <link rel="stylesheet" href="../../css/auth.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
-<body>
-  <main class="app">
-    <section class="panel">
-      <h1>Checkers AI</h1>
+<body class="game-page">
+    <header>
+        <div class="logo" aria-label="GAME AHN">
+            <span class="logo-top">AHN</span>
+            <span class="logo-main" aria-hidden="true">
+                <span class="logo-letter letter-g">G</span>
+                <span class="logo-letter letter-a">A</span>
+                <span class="logo-letter letter-m">M</span>
+                <span class="logo-letter letter-e">E</span>
+            </span>
+        </div>
 
-      <div class="controls">
+        <nav>
+            <a href="#" data-auth-action="login">Log in</a>
+            <a href="#" data-auth-action="signup">Sign Up</a>
+        </nav>
+    </header>
+
+    <main class="game-page-layout">
+        <section class="game-panel">
+            <div class="main-container">
+                <div class="board-wrap">
+                    <div id="board" class="board" aria-label="Checkers board"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <aside class="page-side-games">
+        <h2 class="side-games-title">More Games</h2>
+        <div class="side-games-grid">
+            <a class="side-game-card" href="../tictactoe/tictacindex.html">
+                <span class="side-game-name">Tic-Tac-Toe</span>
+                <span class="side-game-status">Ready to play</span>
+            </a>
+            <a class="side-game-card" href="../connect4/c4index.html">
+                <span class="side-game-name">Connect-4</span>
+                <span class="side-game-status">Ready to play</span>
+            </a>
+            <a class="side-game-card current" href="./checkindex.html">
+                <span class="side-game-name">Checkers</span>
+                <span class="side-game-status">Playing now</span>
+            </a>
+            <a class="side-game-card" href="../../index.html">
+                <span class="side-game-name">Puzzle Slot</span>
+                <span class="side-game-status">Coming soon</span>
+            </a>
+        </div>
+    </aside>
+
+    <div class="game-utility" aria-hidden="true">
         <button id="restartBtn" type="button">Restart</button>
-      </div>
-
-      <div id="turnInfo" class="status">Turn: Human</div>
-      <div id="message" class="message">Select a piece to move.</div>
-            <strong id="capturedByHuman">0</strong>
-            <strong id="capturedByAi">0</strong>
-
-      </div>
-    </section>
-
-    <section class="board-wrap">
-      <div id="board" class="board" aria-label="Checkers board"></div>
-    </section>
-  </main>
-
-  <div id="winnerModal" class="modal-overlay" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="winnerTitle">
-      <h2 id="winnerTitle">Game Over</h2>
-      <p id="winnerText">Winner: Human</p>
-      <button id="modalRestartBtn" type="button">Play Again</button>
+        <div id="turnInfo">Turn: Human</div>
+        <div id="message">Select a piece to move.</div>
+        <strong id="capturedByHuman">0</strong>
+        <strong id="capturedByAi">0</strong>
+        <div id="winnerModal">
+            <div>
+                <p id="winnerText">Winner: Human</p>
+                <button id="modalRestartBtn" type="button">Play Again</button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/main.js"></script>
+    <script src="../../js/config.js"></script>
+    <script src="../../js/auth.js"></script>
 </body>
 </html>
