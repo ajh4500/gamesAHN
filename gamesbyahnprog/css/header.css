@@ -9,7 +9,9 @@ header {
     flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
-    padding: 1.85rem clamp(2rem, 5vw, 4rem);
+    padding-left: 2%;
+    padding-right: clamp(2rem, 5vw, 4rem);
+    margin-bottom: -27px;
     z-index: 1000;
 }
 
@@ -17,7 +19,7 @@ header {
     position: relative;
     display: inline-block;
     line-height: 1;
-    padding: 0.2rem 0.2rem;
+    padding: 1rem 1rem;
 }
 
 .logo-main {
