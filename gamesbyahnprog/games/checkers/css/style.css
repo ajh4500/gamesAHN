@@ -5,17 +5,16 @@
 }
 
 .board-wrap {
-    width: min(100%, 480px);
+    width: min(100%, 620px);
     margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    transform: scale(1.3);
-    transform-origin: top center;
+    transform: none;
 }
 
 .board {
-    width: min(100%, 480px);
+    width: min(100%, 620px);
     aspect-ratio: 1 / 1;
     position: relative;
     display: grid;
