@@ -6,36 +6,8 @@ var ui = {};
 //holds the state of the intial controls visibility
 ui.intialControlsVisible = true;
 
-//holds the setInterval handle for the robot flickering
-ui.robotFlickeringHandle = 0;
-
 //holds the current visible view
 ui.currentView = "";
-
-/*
- * starts the flickering effect of the robot image
- */
-ui.startRobotFlickering = function() {
-    ui.stopRobotFlickering();
-    ui.robotFlickeringHandle = setInterval(function() {
-        $("#robot").toggleClass('robot');
-    }, 500);
-};
-
-/*
- * stops the flickering effect on the robot image
- */
-ui.stopRobotFlickering = function() {
-    clearInterval(ui.robotFlickeringHandle);
-};
-
-ui.showEndActions = function() {
-    $('.end-actions').fadeIn("fast").css("display", "flex");
-};
-
-ui.hideEndActions = function() {
-    $('.end-actions').hide();
-};
 
 /*
  * switchs the view on the UI depending on who's turn it switchs
@@ -47,16 +19,6 @@ ui.switchViewTo = function(turn) {
     function _switch(_turn) {
         ui.currentView = "#" + _turn;
         $(ui.currentView).fadeIn("fast");
-
-        if(_turn === "ai")
-            ui.startRobotFlickering();
-        else
-            ui.stopRobotFlickering();
-
-        if(_turn === "won" || _turn === "lost" || _turn === "draw")
-            ui.showEndActions();
-        else
-            ui.hideEndActions();
     }
 
     if(ui.intialControlsVisible) {

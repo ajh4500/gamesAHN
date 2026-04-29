@@ -19,9 +19,9 @@ const messageEl = document.getElementById("message");
 const restartBtn = document.getElementById("restartBtn");
 const capturedByHumanEl = document.getElementById("capturedByHuman");
 const capturedByAiEl = document.getElementById("capturedByAi");
-const winnerModalEl = document.getElementById("winnerModal");
-const winnerTextEl = document.getElementById("winnerText");
-const modalRestartBtn = document.getElementById("modalRestartBtn");
+const wonEl = document.getElementById("won");
+const lostEl = document.getElementById("lost");
+const drawEl = document.getElementById("draw");
 
 const state = {
   board: createInitialBoard(),
@@ -42,7 +42,7 @@ function posEquals(a, b) {
 }
 
 function resetGame() {
-  closeWinnerModal();
+  hideEndView();
   state.board = createInitialBoard();
   state.turn = HUMAN;
   state.selected = null;
@@ -140,15 +140,26 @@ function refreshHumanLegalMoves() {
   state.legalActions = getHumanLegalActions(state.board);
 }
 
-function openWinnerModal(winner) {
-  winnerTextEl.textContent = winner === HUMAN ? "Winner: Human" : "Winner: AI";
-  winnerModalEl.classList.add("open");
-  winnerModalEl.setAttribute("aria-hidden", "false");
+function showWinner(winner) {
+  showEndView(winner === HUMAN ? "won" : "lost");
 }
 
-function closeWinnerModal() {
-  winnerModalEl.classList.remove("open");
-  winnerModalEl.setAttribute("aria-hidden", "true");
+function hideEndView() {
+  wonEl.style.display = "none";
+  lostEl.style.display = "none";
+  drawEl.style.display = "none";
+}
+
+function showEndView(result) {
+  hideEndView();
+
+  if (result === "won") {
+    wonEl.style.display = "block";
+  } else if (result === "lost") {
+    lostEl.style.display = "block";
+  } else {
+    drawEl.style.display = "block";
+  }
 }
 
 function updateTurnInfo() {
@@ -191,7 +202,7 @@ function updateGameEndIfAny() {
   state.gameOver = true;
   turnInfoEl.textContent = winner === HUMAN ? "Winner: Human" : "Winner: AI";
   messageEl.textContent = "Game over. Press Restart to play again.";
-  openWinnerModal(winner);
+  showWinner(winner);
   return true;
 }
 
@@ -225,7 +236,7 @@ async function playAiTurn() {
     state.gameOver = true;
     turnInfoEl.textContent = "Winner: Human";
     messageEl.textContent = "AI has no legal moves.";
-    openWinnerModal(HUMAN);
+    showWinner(HUMAN);
     renderBoard();
     return;
   }
@@ -420,6 +431,5 @@ function renderBoard() {
 }
 
 restartBtn.addEventListener("click", resetGame);
-modalRestartBtn.addEventListener("click", resetGame);
 
 resetGame();

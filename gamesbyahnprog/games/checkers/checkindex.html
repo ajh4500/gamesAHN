@@ -6,6 +6,7 @@
     <title>Checkers</title>
     <link rel="stylesheet" href="../../css/header.css">
     <link rel="stylesheet" href="../../css/auth.css">
+    <link rel="stylesheet" href="../../css/game-page.css">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body class="game-page">
@@ -32,6 +33,17 @@
                 <div class="board-wrap">
                     <div id="board" class="board" aria-label="Checkers board"></div>
                 </div>
+
+                <div class="control">
+                    <div class="ingame" id="won">You won !</div>
+                    <div class="ingame" id="lost">You lost !</div>
+                    <div class="ingame" id="draw">It's a Draw</div>
+
+                    <div class="end-actions">
+                        <a class="game-action-button" href="../../../index.html">Home</a>
+                        <button class="game-action-button restart-button" id="restartBtn" type="button">Restart</button>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -51,7 +63,7 @@
                 <span class="side-game-name">Checkers</span>
                 <span class="side-game-status">Playing now</span>
             </a>
-            <a class="side-game-card" href="../../index.html">
+            <a class="side-game-card" href="../../../index.html">
                 <span class="side-game-name">Puzzle Slot</span>
                 <span class="side-game-status">Coming soon</span>
             </a>
@@ -59,17 +71,10 @@
     </aside>
 
     <div class="game-utility" aria-hidden="true">
-        <button id="restartBtn" type="button">Restart</button>
         <div id="turnInfo">Turn: Human</div>
         <div id="message">Select a piece to move.</div>
         <strong id="capturedByHuman">0</strong>
         <strong id="capturedByAi">0</strong>
-        <div id="winnerModal">
-            <div>
-                <p id="winnerText">Winner: Human</p>
-                <button id="modalRestartBtn" type="button">Play Again</button>
-            </div>
-        </div>
     </div>
 
     <script type="module" src="./js/main.js"></script>

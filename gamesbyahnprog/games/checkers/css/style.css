@@ -1,104 +1,7 @@
 :root {
-    --dark-cell: darkgrey;
-    --light-cell: white;
-    --human: blue;
-    --ai: green;
+    --dark-cell: #171717;
+    --light-cell: #0d0e10;
     --selected: skyblue;
-    --move: skyblue;
-    --capture: green;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body.game-page {
-    margin: 0;
-    min-height: 100vh;
-    padding-top: 120px;
-    padding-right: 460px;
-    background: #0d0e10;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.game-page-layout {
-    padding: 3rem 2rem 2rem 26%;
-}
-
-.game-panel {
-    width: min(100%, 1360px);
-    min-height: 1000px;
-    padding: 2rem;
-    border-radius: 24px;
-    background: #171717;
-    display: flex;
-    justify-content: center;
-}
-
-.main-container {
-    width: min(100%, 520px);
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.page-side-games {
-    position: fixed;
-    top: 170px;
-    right: clamp(1.5rem, 4vw, 3rem);
-    width: 420px;
-}
-
-.side-games-title {
-    margin: 0 0 1rem;
-    font-size: 2.4rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-}
-
-.side-games-grid {
-    display: grid;
-    gap: 1.15rem;
-    scale: 1 1.1;
-    margin-top: 100px;
-    margin-right: 90px;
-}
-
-.side-game-card {
-    display: block;
-    min-height: 145px;
-    padding: 1.2rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 24px;
-    background: #1d1d1d;
-    color: white;
-    text-decoration: none;
-    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-}
-
-.side-game-card:hover {
-    transform: scale(1.04);
-    border-color: rgba(135, 206, 250, 0.5);
-}
-
-.side-game-card.current {
-    background: #222831;
-}
-
-.side-game-name {
-    display: block;
-    margin-bottom: 0.45rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.side-game-status {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1rem;
 }
 
 .board-wrap {
@@ -122,7 +25,7 @@ body.game-page {
 
 .cell {
     position: relative;
-    border: 0;
+    border: 2px solid lightskyblue;
     padding: 0;
     cursor: pointer;
 }
@@ -209,34 +112,9 @@ body.game-page {
     visibility: hidden;
 }
 
-.game-utility {
-    display: none;
-}
-
 @media (max-width: 720px) {
-    body.game-page {
-        padding-top: 150px;
-        padding-right: 0;
-    }
-
-    .game-page-layout {
-        padding: 2rem 1.25rem 1.25rem;
-    }
-
-    .game-panel {
-        min-height: 620px;
-        padding: 2rem;
-    }
-
-    .main-container,
     .board-wrap,
     .board {
         width: 330px;
-    }
-
-    .page-side-games {
-        position: static;
-        width: auto;
-        margin: 0 1.25rem 1.25rem;
     }
 }

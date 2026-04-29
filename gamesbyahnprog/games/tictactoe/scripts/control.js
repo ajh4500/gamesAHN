@@ -22,17 +22,14 @@ $(".level").each(function() {
  * and UI view to swicthed to indicate that it's human's trun to play
  */
 $(".start").click(function() {
-    var selectedDifficulty = $('.selected').attr("id");
-    if(typeof selectedDifficulty !== "undefined") {
-        ui.hideEndActions();
-        $('.cell').removeClass('occupied').empty();
-        var aiPlayer = new AI(selectedDifficulty);
-        globals.game = new Game(aiPlayer);
+    var selectedDifficulty = $('.level.selected').attr("id") || "master";
+    $('.cell').removeClass('occupied').empty();
+    var aiPlayer = new AI(selectedDifficulty);
+    globals.game = new Game(aiPlayer);
 
-        aiPlayer.plays(globals.game);
+    aiPlayer.plays(globals.game);
 
-        globals.game.start();
-    }
+    globals.game.start();
 });
 
 /*

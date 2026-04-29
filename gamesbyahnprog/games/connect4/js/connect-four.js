@@ -237,11 +237,6 @@ Game.prototype.hideEndView = function() {
     for (var i = 0; i < views.length; i++) {
         views[i].style.display = 'none';
     }
-
-    var actions = document.getElementsByClassName('end-actions')[0];
-    if (actions) {
-        actions.style.display = 'none';
-    }
 }
 
 Game.prototype.renderEndView = function() {
@@ -258,10 +253,6 @@ Game.prototype.renderEndView = function() {
         result.style.display = 'block';
     }
 
-    var actions = document.getElementsByClassName('end-actions')[0];
-    if (actions) {
-        actions.style.display = 'flex';
-    }
 }
 
 Game.prototype.markWin = function() {
