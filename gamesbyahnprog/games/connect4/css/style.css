@@ -32,7 +32,7 @@ body.game-page {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
 }
 
 .page-side-games {
@@ -184,6 +184,54 @@ body.game-page {
     padding: 4px;
 }
 
+.control {
+    width: min(100%, 480px);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    text-align: center;
+    font-family: "Arial Narrow";
+    font-size: 46px;
+    font-weight: bold;
+}
+
+.ingame {
+    display: none;
+    color: lightskyblue;
+}
+
+.end-actions {
+    display: none;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.game-action-button {
+    width: 115px;
+    height: 115px;
+    border: 0;
+    border-radius: 50%;
+    background-color: #87cefa;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0.5;
+    margin-right: 15px;
+    line-height: 115px;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-size: 2rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.game-action-button:hover {
+    opacity: 1;
+    transform: scale(1.04);
+}
+
 .game-utility {
     display: none;
 }
@@ -249,6 +297,7 @@ body.game-page {
     }
 
     .main-container,
+    .control,
     .box-left {
         --cell-size: 47px;
         width: 330px;

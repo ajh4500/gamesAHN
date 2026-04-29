@@ -18,6 +18,8 @@ function Game() {
 }
 
 Game.prototype.init = function() {
+    that.hideEndView();
+
     // Generate 'real' board
     // Create 2-dimensional array
     var game_board = new Array(that.rows);
@@ -84,7 +86,7 @@ Game.prototype.place = function(column) {
         }
 
         if (!that.board.place(column)) {
-            return alert("Invalid move!");
+            return false;
         }
 
         that.round = that.switchRound(that.round);
@@ -193,25 +195,26 @@ Game.prototype.switchRound = function(round) {
 }
 
 Game.prototype.updateStatus = function() {
+    var score = that.board.score();
+
     // Human won
-    if (that.board.score() == -that.score) {
+    if (score == -that.score) {
         that.status = 1;
         that.markWin();
-        alert("You have won!");
     }
 
     // Computer won
-    if (that.board.score() == that.score) {
+    if (score == that.score) {
         that.status = 2;
         that.markWin();
-        alert("You have lost!");
     }
 
     // Tie
-    if (that.board.isFull()) {
+    if (score != that.score && score != -that.score && that.board.isFull()) {
         that.status = 3;
-        alert("Tie!");
     }
+
+    that.renderEndView();
 
     var html = document.getElementById('status');
     if (that.status == 0) {
@@ -229,6 +232,38 @@ Game.prototype.updateStatus = function() {
     }
 }
 
+Game.prototype.hideEndView = function() {
+    var views = document.getElementsByClassName('ingame');
+    for (var i = 0; i < views.length; i++) {
+        views[i].style.display = 'none';
+    }
+
+    var actions = document.getElementsByClassName('end-actions')[0];
+    if (actions) {
+        actions.style.display = 'none';
+    }
+}
+
+Game.prototype.renderEndView = function() {
+    if (that.status == 0) {
+        that.hideEndView();
+        return;
+    }
+
+    that.hideEndView();
+
+    var resultId = that.status == 1 ? 'won' : that.status == 2 ? 'lost' : 'draw';
+    var result = document.getElementById(resultId);
+    if (result) {
+        result.style.display = 'block';
+    }
+
+    var actions = document.getElementsByClassName('end-actions')[0];
+    if (actions) {
+        actions.style.display = 'flex';
+    }
+}
+
 Game.prototype.markWin = function() {
     document.getElementById('game_board').className = "finished";
     for (var i = 0; i < that.winning_array.length; i++) {
@@ -238,21 +273,19 @@ Game.prototype.markWin = function() {
 }
 
 Game.prototype.restartGame = function() {
-    if (confirm('Game is going to be restarted.\nAre you sure?')) {
-        // Dropdown value
-        var difficulty = document.getElementById('difficulty');
-        var depth = difficulty.options[difficulty.selectedIndex].value;
-        that.depth = depth;
-        that.status = 0;
-        that.round = 0;
-        that.init();
-        document.getElementById('ai-iterations').innerHTML = "?";
-        document.getElementById('ai-time').innerHTML = "?";
-        document.getElementById('ai-column').innerHTML = "Column: ?";
-        document.getElementById('ai-score').innerHTML = "Score: ?";
-        document.getElementById('game_board').className = "";
-        that.updateStatus();
-    }
+    // Dropdown value
+    var difficulty = document.getElementById('difficulty');
+    var depth = difficulty.options[difficulty.selectedIndex].value;
+    that.depth = depth;
+    that.status = 0;
+    that.round = 0;
+    that.init();
+    document.getElementById('ai-iterations').innerHTML = "?";
+    document.getElementById('ai-time').innerHTML = "?";
+    document.getElementById('ai-column').innerHTML = "Column: ?";
+    document.getElementById('ai-score').innerHTML = "Score: ?";
+    document.getElementById('game_board').className = "";
+    that.updateStatus();
 }
 
 /**
@@ -263,5 +296,12 @@ function Start() {
 }
 
 window.onload = function() {
-    Start()
+    Start();
+
+    var restartButton = document.getElementsByClassName('restart-button')[0];
+    if (restartButton) {
+        restartButton.addEventListener('click', function() {
+            window.Game.restartGame();
+        });
+    }
 };
