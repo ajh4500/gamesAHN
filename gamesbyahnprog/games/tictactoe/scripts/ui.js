@@ -56,7 +56,7 @@ ui.insertAt = function(indx, symbol) {
     if(!targetCell.hasClass('occupied')) {
         targetCell.html(symbol);
         targetCell.css({
-            color : symbol == "X" ? "green" : "red"
+            color : symbol == "X" ? "green" : "blue"
         });
         targetCell.addClass('occupied');
     }
