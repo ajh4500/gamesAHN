@@ -14,7 +14,27 @@ header {
     margin-bottom: -27px;
     z-index: 1000;
 }
-
+.bottom-header{
+    position: fixed;
+    top: auto;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: #000000;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    padding-left: 2%;
+    padding-right: clamp(2rem, 5vw, 4rem);
+    bottom: 0;
+}
+.Blogo{
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+    padding: 1rem 1rem;
+}
 .logo {
     position: relative;
     display: inline-block;
