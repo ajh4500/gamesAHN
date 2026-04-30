@@ -52,6 +52,10 @@
             cursor: default;
         }
 
+        #turn-message {
+            display: none;
+        }
+
         @media (max-width: 720px) {
             #game-container,
             #gameCanvas {
@@ -97,7 +101,7 @@
 
                     <div id="menu-container">
                         <button id="start-btn" type="button">Start</button>
-                        <div id="turn-message">Turn</div>
+                        <div id="turn-message"></div>
                         <div>Pieces Player 1: <label id="pieces-player1"></label></div>
                         <div>Pieces Player 2: <label id="pieces-player2"></label></div>
                     </div>
