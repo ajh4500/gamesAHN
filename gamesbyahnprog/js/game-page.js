@@ -7,6 +7,12 @@
         var bottomHeader = document.createElement("header");
         bottomHeader.className = "bottom-header";
         bottomHeader.innerHTML =
+            '<nav class="bottom-nav" aria-label="Course credits">' +
+                '<div class="bnav">MCC 416 </div>' +
+                '<div class="bnav">Alexandria Henderson</div>' +
+                '<div class="bnav">Hayden Gamblin</div>' +
+                '<div class="bnav">Nathaneal Tagert</div>' +
+            '</nav>' +
             '<div class="Blogo" aria-label="GAME AHN">' +
                 '<span class="logo-top">AHN</span>' +
                 '<span class="logo-main" aria-hidden="true">' +
