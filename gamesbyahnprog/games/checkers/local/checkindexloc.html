@@ -3,50 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canvas Game</title>
+    <title>Checkers Local</title>
+    <link rel="stylesheet" href="../../../css/header.css">
+    <link rel="stylesheet" href="../../../css/auth.css">
+    <link rel="stylesheet" href="../../../css/game-page.css">
     <style>
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
         #game-container {
             display: flex;
-            align-items: center;
+            justify-content: center;
+            width: min(100%, 350px);
         }
-		#menu-container {
-			margin-left: 20px;
-			width: 200px;
-		}
+
+        #gameCanvas {
+            width: 350px;
+            height: 350px;
+            border: 2px solid lightskyblue;
+            display: block;
+        }
+
+        #menu-container {
+            display: grid;
+            gap: 0.35rem;
+            color: lightskyblue;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
         #start-btn {
-            margin-top: 20px; /* Add margin to the top to separate from the canvas */
-            padding: 10px 20px;
-            font-size: 16px;
+            border: 0;
+            border-radius: 50%;
+            width: 88px;
+            height: 88px;
+            margin: 0 auto;
+            background: #87cefa;
+            color: white;
+            cursor: pointer;
+            opacity: 0.5;
+            font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+            font-size: 1.5rem;
         }
-        #turn-message {
-            margin-top: 10px; /* Add margin between the button and the message */
-            font-size: 16px;
+
+        #start-btn:hover {
+            opacity: 1;
+        }
+
+        #start-btn:disabled {
+            cursor: default;
+        }
+
+        @media (max-width: 720px) {
+            #game-container,
+            #gameCanvas {
+                width: 330px;
+            }
+
+            #gameCanvas {
+                height: 330px;
+            }
         }
     </style>
 </head>
-<body>
-    <div id="game-container">
-        <canvas id="gameCanvas" width="600" height="600" style="border:1px solid #000000;"></canvas>
-	</div>
-    <div id="menu-container">
-        <div><button id="start-btn">Start</button></div>
-        <div id="turn-message">Turn</div>
-		<div>Pieces Player 1 (red): <label id="pieces-player1"></label></div>
-		<div>Pieces Player 2 (black): <label id="pieces-player2"></label></div>
-    </div>
-	<audio id="start" src="snd/start.mp3"></audio>
-	<audio id="move" src="snd/move.mp3"></audio>
-	<audio id="eat" src="snd/eating.mp3"></audio>
-	<audio id="queen" src="snd/queen.mp3"></audio>
-	<audio id="gameOver" src="snd/game-over.mp3"></audio>	
+<body class="game-page">
+    <header>
+        <div class="logo" aria-label="GAME AHN">
+            <span class="logo-top">AHN</span>
+            <span class="logo-main" aria-hidden="true">
+                <span class="logo-letter letter-g">G</span>
+                <span class="logo-letter letter-a">A</span>
+                <span class="logo-letter letter-m">M</span>
+                <span class="logo-letter letter-e">E</span>
+            </span>
+        </div>
+
+        <nav>
+            <a href="#" data-auth-action="login">Log in</a>
+            <a href="#" data-auth-action="signup">Sign Up</a>
+        </nav>
+    </header>
+
+    <main class="game-page-layout">
+        <section class="game-panel">
+            <div class="main-container">
+                <div id="game-container">
+                    <canvas id="gameCanvas" width="350" height="350"></canvas>
+                </div>
+
+                <div class="control">
+                    <div class="mode-actions" data-mode-group="checkers" aria-label="Game mode">
+                        <a class="mode-button" href="../checkindex.html" data-mode-choice="ai">AI</a>
+                        <a class="mode-button current" href="./checkindexloc.html" data-mode-choice="local" aria-current="page">Local</a>
+                    </div>
+
+                    <div id="menu-container">
+                        <button id="start-btn" type="button">Start</button>
+                        <div id="turn-message">Turn</div>
+                        <div>Pieces Player 1: <label id="pieces-player1"></label></div>
+                        <div>Pieces Player 2: <label id="pieces-player2"></label></div>
+                    </div>
+
+                    <div class="ingame" id="won">You won !</div>
+                    <div class="ingame" id="lost">You lost !</div>
+                    <div class="ingame" id="draw">It's a Draw</div>
+
+                    <div class="end-actions">
+                        <a class="game-action-button" href="../../../../index.html">Home</a>
+                        <button class="game-action-button restart-button" type="button">Restart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <aside class="page-side-games">
+        <h2 class="side-games-title">More Games</h2>
+        <div class="side-games-grid">
+            <a class="side-game-card" href="../../tictactoe/tictacindex.html">
+                <span class="side-game-name">Tic-Tac-Toe</span>
+                <span class="side-game-status">Ready to play</span>
+            </a>
+            <a class="side-game-card" href="../../connect4/c4index.html">
+                <span class="side-game-name">Connect-4</span>
+                <span class="side-game-status">Ready to play</span>
+            </a>
+            <a class="side-game-card current" href="../checkindex.html">
+                <span class="side-game-name">Checkers</span>
+                <span class="side-game-status">Playing now</span>
+            </a>
+            <a class="side-game-card" href="../../soltaire/solindex.html">
+                <span class="side-game-name">Solitaire</span>
+                <span class="side-game-status">Ready to play</span>
+            </a>
+        </div>
+    </aside>
+
     <script src="script.js"></script>
+    <script src="../../../js/game-page.js"></script>
+    <script src="../../../js/config.js"></script>
+    <script src="../../../js/auth.js"></script>
 </body>
 </html>

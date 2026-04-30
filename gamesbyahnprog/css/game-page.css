@@ -118,6 +118,8 @@ body.game-page {
 }
 
 .mode-actions {
+    position: relative;
+    z-index: 5;
     display: flex;
     justify-content: center;
     gap: 1rem;
@@ -129,6 +131,7 @@ body.game-page {
 }
 
 .mode-button {
+    display: block;
     width: 115px;
     height: 115px;
     border: 0;
@@ -137,6 +140,7 @@ body.game-page {
     color: white;
     text-align: center;
     cursor: pointer;
+    pointer-events: auto;
     opacity: 0.5;
     line-height: 115px;
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;

@@ -5,11 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const turnMessage = document.getElementById('turn-message');
 	const piecesPlayer1 = document.getElementById('pieces-player1');
 	const piecesPlayer2 = document.getElementById('pieces-player2');
+	const restartButton = document.querySelector('.restart-button');
 
-    const imagePath = 'img/pieces.png';
-    const pieceSize = 180;
-    const squareSize = 75; // Size of each square in the checkerboard
-    let redQueen, redPiece, blackPiece, blackQueen;
+    const squareSize = canvas.width / 8;
 	let startSnd, moveSnd, eatSnd, queenSnd, gameOverSnd;
 	
 	// Load sounds
@@ -56,6 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
     startButton.addEventListener('click', gameStart);
+	if (restartButton) {
+		restartButton.addEventListener('click', gameStart);
+	}
 	canvas.addEventListener('click', clickPiece);
 	
 	drawGrid();
@@ -67,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			gameRunning = true;
 			console.log('Game Started!');
 			startButton.disabled = true; // Disable the start button
-			loadPieces();
+			drawBoard();
 			updateMessagesMenu();
 		}
 		else {
@@ -128,34 +129,11 @@ document.addEventListener('DOMContentLoaded', () => {
 		piecesPlayer2.textContent = countPiecesPlayer(2);
     }
 
-    function loadPieces() {
-        const image = new Image();
-        image.src = imagePath;
-
-        image.onload = () => {
-            redQueen = createPieceCanvas(image, 0, 0);
-            redPiece = createPieceCanvas(image, pieceSize, 0);
-            blackPiece = createPieceCanvas(image, 0, pieceSize);
-            blackQueen = createPieceCanvas(image, pieceSize, pieceSize);
-
-            drawBoard();
-        };
-    }
-
-    function createPieceCanvas(image, sx, sy) {
-        const pieceCanvas = document.createElement('canvas');
-        pieceCanvas.width = pieceSize;
-        pieceCanvas.height = pieceSize;
-        const pieceContext = pieceCanvas.getContext('2d');
-        pieceContext.drawImage(image, sx, sy, pieceSize, pieceSize, 0, 0, pieceSize, pieceSize);
-        return pieceCanvas;
-    }
-
     function drawGrid() {
-        const colors = ['#8B4513', '#FFFACD']; // Dark brown and very light brown
+        const colors = ['#0d0e10', '#171717'];
 
 		// Set the style for the border
-		context.strokeStyle = 'black'; // Color of the border
+		context.strokeStyle = 'lightskyblue'; // Color of the border
 		context.lineWidth = 1; // Width of the border
 		
         for (let row = 0; row < 8; row++) {
@@ -175,26 +153,42 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let row = 0; row < 8; row++) {
             for (let col = 0; col < 8; col++) {
                 if (board[row][col] === 1) {
-					if(boardQueen[row][col])
-						context.drawImage(redQueen, col * squareSize, row * squareSize, squareSize, squareSize);
-					else
-						context.drawImage(redPiece, col * squareSize, row * squareSize, squareSize, squareSize);
+					drawPiece(row, col, 'lightskyblue', boardQueen[row][col]);
                 } else if (board[row][col] === 2) {
-					if(boardQueen[row][col])
-						context.drawImage(blackQueen, col * squareSize, row * squareSize, squareSize, squareSize);
-					else
-						context.drawImage(blackPiece, col * squareSize, row * squareSize, squareSize, squareSize);
+					drawPiece(row, col, '#24f3b2', boardQueen[row][col]);
                 }
             }
         }
     }
+
+	function drawPiece(row, col, color, isQueen) {
+		const centerX = col * squareSize + squareSize / 2;
+		const centerY = row * squareSize + squareSize / 2;
+		const radius = squareSize * 0.38;
+
+		context.beginPath();
+		context.arc(centerX, centerY, radius, 0, Math.PI * 2);
+		context.fillStyle = color;
+		context.fill();
+		context.lineWidth = 2;
+		context.strokeStyle = 'rgba(255,255,255,0.55)';
+		context.stroke();
+
+		if (isQueen) {
+			context.fillStyle = '#f6d86b';
+			context.font = `${squareSize * 0.45}px Arial`;
+			context.textAlign = 'center';
+			context.textBaseline = 'middle';
+			context.fillText('K', centerX, centerY);
+		}
+	}
 	
 	function clickPiece(event) {
 		// on click on the canvas
 		if (gameRunning) {
 			const rect = canvas.getBoundingClientRect();
-			const x = event.clientX - rect.left;
-			const y = event.clientY - rect.top;
+			const x = (event.clientX - rect.left) * (canvas.width / rect.width);
+			const y = (event.clientY - rect.top) * (canvas.height / rect.height);
 
 			const col = Math.floor(x / squareSize);
 			const row = Math.floor(y / squareSize);
@@ -562,6 +556,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function playSoundEffectStart() {
+		if (!startSnd) return;
 		// Reset the currentTime to start from the beginning
 		startSnd.currentTime = 0;
 		
@@ -575,6 +570,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 	
 	function playSoundEffectMove() {
+		if (!moveSnd) return;
 		// Reset the currentTime to start from the beginning
 		moveSnd.currentTime = 0;
 		
@@ -596,6 +592,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	
 	function playSoundEffectEat() {
+		if (!eatSnd) return;
 		// Reset the currentTime to start from the beginning
 		eatSnd.currentTime = 0;
 		
@@ -616,6 +613,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function playSoundEffectQueen() {
+		if (!queenSnd) return;
 		// Reset the currentTime to start from the beginning
 		queenSnd.currentTime = 0;
 		
@@ -629,6 +627,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	function playSoundEffectGameOver() {
+		if (!gameOverSnd) return;
 		// Reset the currentTime to start from the beginning
 		gameOverSnd.currentTime = 0;
 		
