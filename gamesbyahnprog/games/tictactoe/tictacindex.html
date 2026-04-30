@@ -125,7 +125,7 @@
             }, true);
 
             new MutationObserver(function () {
-                if (document.querySelector(".ingame[style*='block']")) showPrompt();
+                if (document.querySelector("#won[style*='block'], #lost[style*='block'], #draw[style*='block']")) showPrompt();
             }).observe(document.body, { attributes: true, attributeFilter: ["style"], subtree: true });
         });
     </script>

@@ -4,14 +4,14 @@
     var ended = false;
 
     function renderResult(result) {
-        $(".ingame").hide();
+        $(".ingame").stop(true, true).hide();
 
         if (result === "draw") {
-            $("#draw").fadeIn("fast");
+            $("#draw").text("It's a Draw").show();
         } else if (result === "X-won") {
-            $("#won").fadeIn("fast");
+            $("#won").text("Player 1 won !").show();
         } else if (result === "O-won") {
-            $("#lost").fadeIn("fast");
+            $("#lost").text("Player 2 won !").show();
         }
     }
 
