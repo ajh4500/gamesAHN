@@ -159,9 +159,9 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let row = 0; row < 8; row++) {
             for (let col = 0; col < 8; col++) {
                 if (board[row][col] === 1) {
-					drawPiece(row, col, 'lightskyblue', boardQueen[row][col]);
+					drawPiece(row, col, '#0b3d91', boardQueen[row][col]);
                 } else if (board[row][col] === 2) {
-					drawPiece(row, col, '#24f3b2', boardQueen[row][col]);
+					drawPiece(row, col, '#063b02', boardQueen[row][col]);
                 }
             }
         }
