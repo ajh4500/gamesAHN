@@ -30,28 +30,6 @@
             text-align: center;
         }
 
-        #start-btn {
-            border: 0;
-            border-radius: 50%;
-            width: 88px;
-            height: 88px;
-            margin: 0 auto;
-            background: #87cefa;
-            color: white;
-            cursor: pointer;
-            opacity: 0.5;
-            font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-            font-size: 1.5rem;
-        }
-
-        #start-btn:hover {
-            opacity: 1;
-        }
-
-        #start-btn:disabled {
-            cursor: default;
-        }
-
         #turn-message {
             display: none;
         }
@@ -87,7 +65,7 @@
     </header>
 
     <main class="game-page-layout">
-        <section class="game-panel">
+        <section class="game-panel checkers-panel">
             <div class="main-container">
                 <div id="game-container">
                     <canvas id="gameCanvas" width="350" height="350"></canvas>
@@ -96,11 +74,10 @@
                 <div class="control">
                     <div class="mode-actions" data-mode-group="checkers" aria-label="Game mode">
                         <a class="mode-button" href="../checkindex.html" data-mode-choice="ai">AI</a>
-                        <a class="mode-button current" href="./checkindexloc.html" data-mode-choice="local" aria-current="page">Local</a>
+                        <a class="mode-button" href="./checkindexloc.html" data-mode-choice="local">Local</a>
                     </div>
 
                     <div id="menu-container">
-                        <button id="start-btn" type="button">Start</button>
                         <div id="turn-message"></div>
                         <div>Pieces Player 1: <label id="pieces-player1"></label></div>
                         <div>Pieces Player 2: <label id="pieces-player2"></label></div>
@@ -142,6 +119,45 @@
     </aside>
 
     <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var prompt = document.querySelector("[data-mode-group]");
+            if (!prompt) return;
+
+            function showPrompt() {
+                prompt.classList.remove("is-hidden");
+                prompt.style.opacity = "";
+                prompt.style.transition = "";
+            }
+
+            prompt.addEventListener("click", function (event) {
+                var link = event.target.closest("[data-mode-choice]");
+                if (!link) return;
+
+                event.preventDefault();
+                prompt.style.transition = "opacity 160ms ease";
+                prompt.style.opacity = "0";
+
+                window.setTimeout(function () {
+                    var targetUrl = new URL(link.getAttribute("href"), window.location.href).href.split("#")[0];
+                    var currentUrl = window.location.href.split("#")[0];
+                    if (targetUrl === currentUrl) {
+                        prompt.classList.add("is-hidden");
+                    } else {
+                        window.location.href = link.href;
+                    }
+                }, 170);
+            });
+
+            document.addEventListener("click", function (event) {
+                if (event.target.closest(".restart-button")) showPrompt();
+            }, true);
+
+            new MutationObserver(function () {
+                if (document.querySelector(".ingame[style*='block']")) showPrompt();
+            }).observe(document.body, { attributes: true, attributeFilter: ["style"], subtree: true });
+        });
+    </script>
     <script src="../../../js/game-page.js"></script>
     <script src="../../../js/config.js"></script>
     <script src="../../../js/auth.js"></script>

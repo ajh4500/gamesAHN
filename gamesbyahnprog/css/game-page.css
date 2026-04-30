@@ -52,6 +52,10 @@ body.game-page {
     width: min(100%, 430px);
 }
 
+.checkers-panel .mode-actions {
+    margin-bottom: 2rem;
+}
+
 .page-side-games {
     position: absolute;
     top: 145px;

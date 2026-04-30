@@ -38,7 +38,7 @@
 
                 <div class="control">
                     <div class="mode-actions" data-mode-group="connect4" aria-label="Game mode">
-                        <a class="mode-button current" href="./c4index.html" data-mode-choice="ai" aria-current="page">AI</a>
+                        <a class="mode-button" href="./c4index.html" data-mode-choice="ai">AI</a>
                         <a class="mode-button" href="local/c4loc.html" data-mode-choice="local">Local</a>
                     </div>
 
@@ -90,6 +90,45 @@
 
     <script src="ai/js/board.js"></script>
     <script src="ai/js/connect-four.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var prompt = document.querySelector("[data-mode-group]");
+            if (!prompt) return;
+
+            function showPrompt() {
+                prompt.classList.remove("is-hidden");
+                prompt.style.opacity = "";
+                prompt.style.transition = "";
+            }
+
+            prompt.addEventListener("click", function (event) {
+                var link = event.target.closest("[data-mode-choice]");
+                if (!link) return;
+
+                event.preventDefault();
+                prompt.style.transition = "opacity 160ms ease";
+                prompt.style.opacity = "0";
+
+                window.setTimeout(function () {
+                    var targetUrl = new URL(link.getAttribute("href"), window.location.href).href.split("#")[0];
+                    var currentUrl = window.location.href.split("#")[0];
+                    if (targetUrl === currentUrl) {
+                        prompt.classList.add("is-hidden");
+                    } else {
+                        window.location.href = link.href;
+                    }
+                }, 170);
+            });
+
+            document.addEventListener("click", function (event) {
+                if (event.target.closest(".restart-button")) showPrompt();
+            }, true);
+
+            new MutationObserver(function () {
+                if (document.querySelector(".ingame[style*='block']")) showPrompt();
+            }).observe(document.body, { attributes: true, attributeFilter: ["style"], subtree: true });
+        });
+    </script>
     <script src="../../js/game-page.js"></script>
     <script src="../../js/config.js"></script>
     <script src="../../js/auth.js"></script>

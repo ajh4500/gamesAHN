@@ -53,7 +53,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
-    startButton.addEventListener('click', gameStart);
+    if (startButton) {
+        startButton.addEventListener('click', gameStart);
+    }
 	if (restartButton) {
 		restartButton.addEventListener('click', gameStart);
 	}
@@ -67,7 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			// start first time
 			gameRunning = true;
 			console.log('Game Started!');
-			startButton.disabled = true; // Disable the start button
+			if (startButton) {
+				startButton.disabled = true; // Disable the start button
+			}
 			drawBoard();
 			updateMessagesMenu();
 		}
@@ -110,7 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 			
 			console.log('Game Started!');
-			startButton.disabled = true; // Disable the start button
+			if (startButton) {
+				startButton.disabled = true; // Disable the start button
+			}
 			drawBoard();
 			updateMessagesMenu();
 		}
@@ -296,7 +302,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			} else {
 				window.alert("Game Over. Congratulation player 2 (black) you won!");
 			}
-			startButton.disabled = false; // Enable the start button
+			if (startButton) {
+				startButton.disabled = false; // Enable the start button
+			}
 			playSoundEffectGameOver();
 		}
 	}
@@ -641,4 +649,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	
+	gameStart();
 });
