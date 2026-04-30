@@ -5,7 +5,7 @@
 }
 
 .board-wrap {
-    width: min(100%, 620px);
+    width: min(100%, 350px);
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -14,7 +14,7 @@
 }
 
 .board {
-    width: min(100%, 620px);
+    width: min(100%, 350px);
     aspect-ratio: 1 / 1;
     position: relative;
     display: grid;

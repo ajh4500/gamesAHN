@@ -5,30 +5,34 @@
 body.game-page {
     margin: 0;
     min-height: 100vh;
-    padding-top: 120px;
-    padding-right: 460px;
+    padding-top: 105px;
+    padding-right: 360px;
     background: #0d0e10;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .game-page-layout {
-    padding: 2rem 2rem 1.5rem 26%;
+    padding: 1.25rem 1.5rem 1rem 22%;
 }
 
 .game-panel {
     position: relative;
-    width: min(100%, 600px);
-    min-height: 600px;
-    padding: 2rem;
+    width: min(100%, 520px);
+    min-height: 590px;
+    padding: 1.5rem;
     border-radius: 24px;
     background: #171717;
     display: flex;
     justify-content: center;
 }
 
-.main-container {
+.game-panel.tictactoe-panel {
     width: min(100%, 600px);
+}
+
+.main-container {
+    width: min(100%, 360px);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -36,16 +40,20 @@ body.game-page {
     justify-content: space-between;
 }
 
+.tictactoe-panel .main-container {
+    width: min(100%, 430px);
+}
+
 .page-side-games {
-    position: fixed;
-    top: 170px;
-    right: clamp(1.5rem, 4vw, 3rem);
-    width: 420px;
+    position: absolute;
+    top: 145px;
+    right: clamp(1rem, 3vw, 2rem);
+    width: 330px;
 }
 
 .side-games-title {
     margin: 0 0 1rem;
-    font-size: 2.4rem;
+    font-size: 2rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
@@ -53,16 +61,15 @@ body.game-page {
 
 .side-games-grid {
     display: grid;
-    gap: 1.15rem;
-    scale: 1 1.1;
-    margin-top: 100px;
-    margin-right: 90px;
+    gap: 0.85rem;
+    margin-top: 70px;
+    margin-right: 45px;
 }
 
 .side-game-card {
     display: block;
-    min-height: 145px;
-    padding: 1.2rem;
+    min-height: 112px;
+    padding: 1rem;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 24px;
     background: #1d1d1d;
@@ -83,25 +90,25 @@ body.game-page {
 .side-game-name {
     display: block;
     margin-bottom: 0.45rem;
-    font-size: 1.2rem;
+    font-size: 1.05rem;
     font-weight: bold;
 }
 
 .side-game-status {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
 .control {
     z-index: 2;
-    width: min(100%, 480px);
+    width: min(100%, 360px);
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     text-align: center;
     font-family: "Arial Narrow";
-    font-size: 46px;
+    font-size: 40px;
     font-weight: bold;
 }
 
@@ -110,11 +117,48 @@ body.game-page {
     color: lightskyblue;
 }
 
+.mode-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0 0;
+}
+
+.mode-actions.is-hidden {
+    display: none;
+}
+
+.mode-button {
+    width: 115px;
+    height: 115px;
+    border: 0;
+    border-radius: 50%;
+    background-color: #87cefa;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0.5;
+    line-height: 115px;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    font-size: 2rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.mode-button:hover,
+.mode-button.current {
+    opacity: 1;
+}
+
+.mode-button:hover {
+    transform: scale(1.04);
+}
+
 .end-actions {
     position: absolute;
-    left: 2rem;
-    right: 2rem;
-    bottom: 2rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
     display: flex;
     justify-content: space-between;
     gap: 1rem;
@@ -122,8 +166,8 @@ body.game-page {
 }
 
 .game-action-button {
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     border: 0;
     border-radius: 50%;
     background-color: #87cefa;
@@ -132,9 +176,9 @@ body.game-page {
     cursor: pointer;
     opacity: 0.5;
     margin-right: 0;
-    line-height: 150px;
+    line-height: 130px;
     font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-    font-size: 2.35rem;
+    font-size: 2rem;
     text-decoration: none;
     transition: transform 0.2s ease, opacity 0.2s ease;
 }

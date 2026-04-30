@@ -1,5 +1,5 @@
 .board {
-    width: min(100%, 620px);
+    width: min(100%, 380px);
     aspect-ratio: 1 / 1;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -13,7 +13,7 @@
     border: 2px solid lightskyblue;
     text-align: center;
     font-family: "Arial Narrow";
-    font-size: 82px;
+    font-size: 60px;
     font-weight: bold;
     cursor: pointer;
     display: flex;
