@@ -11,21 +11,12 @@ class View {
     let div = document.querySelector("#showTurn") || document.createElement("div");
     div.id = "showTurn"
     div.innerHTML = "";
-    let p = document.createElement("p");
     
     let circle = document.createElement("div");
     circle.classList.add(this.game.currentPlayer.sym)
     circle.classList.add("turnColor")
     
-    if(this.game.isGameOver()) {
-      p.innerText = "WINS!"
-    } else {
-      p.innerText = "its your turn"
-
-    }
-    
     div.appendChild(circle)
-    div.appendChild(p)
     this.el.prepend(div);
   }
 
@@ -44,17 +35,16 @@ class View {
       this.showTurn();
 
     let html = "";
-    html += "<div class='leg'><div class='foot'></div></div>"
-    html += "<div>"
+    html += "<table id='game_board' cellpadding='0'>"
     for(let row = 0; row < 6; row++) {
-      html += "<ul>"
+      html += "<tr>"
       for(let col = 0; col < 7; col++) {
-        html += `<li value='${col}'  class='col-${col}' data-row='${row}'></li>`
+        html += `<td class='empty col-${col}' data-col='${col}' data-row='${row}'></td>`
       }
-      html += '</ul>'
+      html += "</tr>"
     }
-    html += "</div>"
-    html += "<div class='leg'></div>"
+    html += "</table>"
+
     let div = document.querySelector("#gameBoard")
     if(!div) {
       div = document.createElement("div");
@@ -65,10 +55,11 @@ class View {
   }
 
   playGame = (e) => {
-    if(e.target.tagName !== "LI") return
-    let col = e.target.value
+    if(e.target.tagName !== "TD") return
+    let col = e.target.dataset.col
     let sym = this.game.turn(col)
     if(this.game.isGameOver()) {
+      document.getElementById("game_board").className = "finished";
       this.el.removeEventListener('click', this.playGame)
     }
       this.dropDisc(sym);
@@ -84,6 +75,8 @@ class View {
 
       let disc = columns.pop();
       setTimeout(() => {
+        disc.classList.remove("empty")
+        disc.classList.add("coin")
         disc.classList.add(sym)
         this.swapHighlights();
       }, columns.length * 1)
@@ -95,9 +88,9 @@ class View {
     if(e.target.tagName === "DIV") {
       this.removeHighlights()
     }
-    if(e.target.tagName !== "LI") return
+    if(e.target.tagName !== "TD") return
     this.removeHighlights()
-    let col = ".col-" + e.target.value;
+    let col = ".col-" + e.target.dataset.col;
     let collection = document.querySelectorAll(col);
     collection.forEach(el => {
       if(this.game.currentPlayer.sym === "r") {

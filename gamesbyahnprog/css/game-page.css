@@ -31,6 +31,10 @@ body.game-page {
     width: min(100%, 600px);
 }
 
+.game-panel.connect4-panel {
+    width: min(100%, 600px);
+}
+
 .main-container {
     width: min(100%, 360px);
     margin: 0 auto;
@@ -41,6 +45,10 @@ body.game-page {
 }
 
 .tictactoe-panel .main-container {
+    width: min(100%, 430px);
+}
+
+.connect4-panel .main-container {
     width: min(100%, 430px);
 }
 

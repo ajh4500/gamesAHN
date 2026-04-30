@@ -1,9 +1,10 @@
 .box-left {
     --cell-size: 50px;
     position: relative;
-    width: min(100%, 350px);
+    width: min(100%, 366px);
+    padding-right: 16px;
     margin: 0 auto;
-    overflow: hidden;
+    overflow: visible;
     transform: none;
 }
 
@@ -78,6 +79,6 @@
 @media (max-width: 720px) {
     .box-left {
         --cell-size: 47px;
-        width: 330px;
+        width: 346px;
     }
 }
