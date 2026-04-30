@@ -70,7 +70,7 @@ body.game-page {
 .side-games-grid {
     display: grid;
     gap: 0.85rem;
-    margin-top: 70px;
+    margin-top: 35px;
     margin-right: 45px;
 }
 

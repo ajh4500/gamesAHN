@@ -25,6 +25,11 @@ ui.switchViewTo = function(turn) {
         //if the game is just starting
         ui.intialControlsVisible = false;
 
+        if($('.intial').length === 0) {
+            _switch(turn);
+            return;
+        }
+
         $('.intial').fadeOut({
             duration : "slow",
             done : function() {

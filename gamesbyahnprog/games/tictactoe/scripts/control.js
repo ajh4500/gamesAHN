@@ -3,34 +3,16 @@
  */
 var globals = {};
 
-/*
- * choosing difficulty level (onclick span.level) behavior and control
- * when a level is clicked, it becomes highlighted and the "ai.level" variable
- * is set to the chosen level
- */
-$(".level").each(function() {
-    var $this = $(this);
-    $this.click(function() {
-        $('.level.selected').removeClass('selected').addClass('not-selected');
-        $this.removeClass('not-selected').addClass('selected');
-    });
-});
-
-/*
- * start game (onclick div.start) behavior and control
- * when start is clicked and a level is chosen, the game status changes to "running"
- * and UI view to swicthed to indicate that it's human's trun to play
- */
-$(".start").click(function() {
-    var selectedDifficulty = $('.level.selected').attr("id") || "master";
+function startMasterGame() {
     $('.cell').removeClass('occupied').empty();
-    var aiPlayer = new AI(selectedDifficulty);
+    var aiPlayer = new AI("master");
     globals.game = new Game(aiPlayer);
 
     aiPlayer.plays(globals.game);
-
     globals.game.start();
-});
+}
+
+startMasterGame();
 
 /*
  * click on cell (onclick div.cell) behavior and control

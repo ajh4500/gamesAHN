@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tic-Tac-Toe AI</title>
-    <link rel="stylesheet" href="../../css/header.css">
-    <link rel="stylesheet" href="../../css/auth.css">
-    <link rel="stylesheet" href="../../css/game-page.css">
-    <link rel="stylesheet" href="./styles/ui.css?v=20260427a">
+    <title>Tic-Tac-Toe Local</title>
+    <link rel="stylesheet" href="../../../css/header.css">
+    <link rel="stylesheet" href="../../../css/auth.css">
+    <link rel="stylesheet" href="../../../css/game-page.css">
+    <link rel="stylesheet" href="../styles/ui.css?v=20260427a">
 </head>
 <body class="game-page">
     <header>
@@ -44,8 +44,8 @@
 
                 <div class="control">
                     <div class="mode-actions" data-mode-group="tictactoe" aria-label="Game mode">
-                        <a class="mode-button current" href="./tictacindex.html" data-mode-choice="ai" aria-current="page">AI</a>
-                        <a class="mode-button" href="local/tictacloc.html" data-mode-choice="local">Local</a>
+                        <a class="mode-button" href="../tictacindex.html" data-mode-choice="ai">AI</a>
+                        <a class="mode-button current" href="./tictacloc.html" data-mode-choice="local" aria-current="page">Local</a>
                     </div>
 
                     <div class="ingame" id="human"></div>
@@ -55,7 +55,7 @@
                     <div class="ingame" id="draw">It's a Draw</div>
 
                     <div class="end-actions">
-                        <a class="game-action-button" href="../../../index.html">Home</a>
+                        <a class="game-action-button" href="../../../../index.html">Home</a>
                         <button class="game-action-button restart-button" type="button">Restart</button>
                     </div>
                 </div>
@@ -66,32 +66,29 @@
     <aside class="page-side-games">
         <h2 class="side-games-title">More Games</h2>
         <div class="side-games-grid">
-            <a class="side-game-card current" href="./tictacindex.html">
+            <a class="side-game-card current" href="../tictacindex.html">
                 <span class="side-game-name">Tic-Tac-Toe</span>
                 <span class="side-game-status">Playing now</span>
             </a>
-            <a class="side-game-card" href="../connect4/c4index.html">
+            <a class="side-game-card" href="../../connect4/c4index.html">
                 <span class="side-game-name">Connect-4</span>
                 <span class="side-game-status">Ready to play</span>
             </a>
-            <a class="side-game-card" href="../checkers/checkindex.html">
+            <a class="side-game-card" href="../../checkers/checkindex.html">
                 <span class="side-game-name">Checkers</span>
                 <span class="side-game-status">Ready to play</span>
             </a>
-            <a class="side-game-card" href="../soltaire/solindex.html">
+            <a class="side-game-card" href="../../soltaire/solindex.html">
                 <span class="side-game-name">Solitaire</span>
                 <span class="side-game-status">Ready to play</span>
             </a>
         </div>
     </aside>
 
-    <script src="scripts/jquery-1.10.1.min.js?v=20260427a"></script>
-    <script src="scripts/ui.js?v=20260427a"></script>
-    <script src="scripts/game.js?v=20260427a"></script>
-    <script src="scripts/ai.js?v=20260427a"></script>
-    <script src="scripts/control.js?v=20260427a"></script>
-    <script src="../../js/game-page.js"></script>
-    <script src="../../js/config.js"></script>
-    <script src="../../js/auth.js"></script>
+    <script src="../scripts/jquery-1.10.1.min.js?v=20260427a"></script>
+    <script src="./tictaclocal.js"></script>
+    <script src="../../../js/game-page.js"></script>
+    <script src="../../../js/config.js"></script>
+    <script src="../../../js/auth.js"></script>
 </body>
 </html>
