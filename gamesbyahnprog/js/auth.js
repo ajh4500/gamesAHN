@@ -138,7 +138,7 @@
             return;
         }
 
-        window.location.href = window.location.pathname.includes("/games/") ? "../../index.html" : "index.html";
+        window.location.href = window.location.pathname.includes("/games/") ? "../../../index.html" : "index.html";
     }
 
 async function openProfile() {
