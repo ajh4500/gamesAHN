@@ -4,7 +4,7 @@
   width: min(100%, 366px);
   padding-right: 16px;
   margin: 0 auto;
-  overflow: visible;
+  overflow: hidden;
   transform: none;
 }
 
@@ -32,10 +32,10 @@
 #game_board td.showGray::after {
   background-color: rgba(135, 206, 250, 0.1);
   content: "";
-  height: 10000px;
+  height: 360px;
   left: 0;
   position: absolute;
-  top: -5000px;
+  top: -155px;
   width: 100%;
   z-index: -1;
 }

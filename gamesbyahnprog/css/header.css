@@ -53,12 +53,16 @@ header {
     line-height: 1;
     padding: 1rem 1rem;
     margin: 0 auto;
+    cursor: pointer;
+    text-decoration: none;
 }
 .logo {
     position: relative;
     display: inline-block;
     line-height: 1;
     padding: 1rem 1rem;
+    cursor: pointer ;
+    text-decoration: none;
 }
 
 .logo-main {
@@ -106,7 +110,8 @@ header {
     color: white;
     text-shadow: none;
     -webkit-text-stroke: 1px rgba(5, 28, 30, 0.078);
-    z-index: 2;
+    z-index: 1000;
+    cursor:pointer;
 }
 
 nav {

@@ -15,6 +15,10 @@ class Board {
     return !this.grid[0][col];
   }
 
+  isFull() {
+    return this.grid[0].every(cell => cell !== null);
+  }
+
   placeMarker(col, sym) {
     if (this.isValidColumn(col)) {
       for(let row = this.height - 1; row >= 0; row--) {

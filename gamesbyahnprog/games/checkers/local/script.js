@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	queenSnd = document.getElementById("queen");
 	gameOverSnd = document.getElementById("gameOver");
 	
-    let currentTurn = 1; // 1 for player 1 (red), 2 for player 2 (black)
+    let currentTurn = 1; // 1 for player 1 (blue), 2 for player 2 (green)
 	let gameRunning = false;
 	let movement = false;
 	let movementDoubleEat = false;
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 		else {
 			// restart after game over
-			currentTurn = 1; // 1 for player 1 (red), 2 for player 2 (black)
+			currentTurn = 1; // 1 for player 1 (blue), 2 for player 2 (green)
 			gameRunning = true;
 			movement = false;
 			movementDoubleEat = false;
@@ -125,11 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateMessagesMenu() {
 		if(currentTurn === 1)
 		{
-			turnMessage.textContent = "Player 1 (red), it's your turn";
+			turnMessage.textContent = "Player 1 (blue), it's your turn";
 		}
 		else
 		{
-			turnMessage.textContent = "Player 2 (black), it's your turn";
+			turnMessage.textContent = "Player 2 (green), it's your turn";
 		}
 		piecesPlayer1.textContent = countPiecesPlayer(1);
 		piecesPlayer2.textContent = countPiecesPlayer(2);
@@ -298,9 +298,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			if(numberPiecesPlayer1 === numberPiecesPlayer2) {
 				window.alert("Game Over. It's a draw!");
 			} else if(numberPiecesPlayer1 > numberPiecesPlayer2) {
-				window.alert("Game Over. Congratulation player 1 (red) you won!");
+				messageTag.textContent="Game Over. Congratulation player 1 (blue) you won!";
 			} else {
-				window.alert("Game Over. Congratulation player 2 (black) you won!");
+				window.alert("Game Over. Congratulation player 2 (green) you won!");
 			}
 			if (startButton) {
 				startButton.disabled = false; // Enable the start button
