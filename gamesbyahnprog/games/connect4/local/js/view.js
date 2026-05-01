@@ -25,6 +25,7 @@ class View {
     button.innerText = "Play Again?"
     button.addEventListener("click", () => {
     this.game.newGame();
+    this.hideEndView();
     this.drawBoard();
     this.bindEvents();``
     })
@@ -58,11 +59,13 @@ class View {
     if(e.target.tagName !== "TD") return
     let col = e.target.dataset.col
     let sym = this.game.turn(col)
-    if(this.game.isGameOver()) {
+    if(!sym) return
+    if(this.game.status !== 0) {
       document.getElementById("game_board").className = "finished";
       this.el.removeEventListener('click', this.playGame)
     }
-      this.dropDisc(sym);
+    this.dropDisc(sym);
+    this.renderEndView();
     }
     
     dropDisc = (sym) => {
@@ -123,6 +126,27 @@ class View {
         el.classList.remove("showGray");
         el.classList.add("showPink")
       })
+    }
+  }
+
+  hideEndView() {
+    document.querySelectorAll(".ingame").forEach(el => {
+      el.style.display = "none";
+    })
+  }
+
+  renderEndView() {
+    if (this.game.status === 0) {
+      this.hideEndView();
+      return;
+    }
+
+    this.hideEndView();
+
+    let resultId = this.game.status === 1 ? "won" : this.game.status === 2 ? "lost" : "draw";
+    let result = document.getElementById(resultId);
+    if (result) {
+      result.style.display = "block";
     }
   }
 
