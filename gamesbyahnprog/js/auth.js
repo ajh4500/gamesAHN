@@ -141,6 +141,58 @@
         window.location.href = window.location.pathname.includes("/games/") ? "../../index.html" : "index.html";
     }
 
+async function openProfile() {
+    var user = getUser();
+    if (!user) return;
+
+    try {
+        var response = await fetch(API_BASE + "/stats/" + user.id);
+        var stats = await response.json();
+
+        var games = {
+            tictactoe: { wins: 0, losses: 0, draws: 0, total: 0 },
+            connect4: { wins: 0, losses: 0, draws: 0, total: 0 },
+            checkers: { wins: 0, losses: 0, draws: 0, total: 0 }
+        };
+
+        stats.forEach(function (stat) {
+            var game = stat.game_name;
+            if (!games[game]) return;
+
+            if (stat.result === "win") games[game].wins = stat.count;
+            else if (stat.result === "loss") games[game].losses = stat.count;
+            else if (stat.result === "draw") games[game].draws = stat.count;
+
+            games[game].total += stat.count;
+        });
+
+        alert(
+            "Profile: " + user.username +
+
+            "\n\nTic-Tac-Toe" +
+            "\nWins: " + games.tictactoe.wins +
+            "\nLosses: " + games.tictactoe.losses +
+            "\nDraws: " + games.tictactoe.draws +
+            "\nTotal: " + games.tictactoe.total +
+
+            "\n\nConnect 4" +
+            "\nWins: " + games.connect4.wins +
+            "\nLosses: " + games.connect4.losses +
+            "\nDraws: " + games.connect4.draws +
+            "\nTotal: " + games.connect4.total +
+
+            "\n\nCheckers" +
+            "\nWins: " + games.checkers.wins +
+            "\nLosses: " + games.checkers.losses +
+            "\nDraws: " + games.checkers.draws +
+            "\nTotal: " + games.checkers.total
+        );
+
+    } catch (error) {
+        alert("Could not load profile stats.");
+    }
+}
+
     function bindEvents() {
         document.addEventListener("click", function (event) {
             var actionEl = event.target.closest("[data-auth-action]");
@@ -156,7 +208,7 @@
                 } else if (action === "profile") {
                     var user = getUser();
                     if (user) {
-                        alert("Logged in as " + user.username);
+                        openProfile();
                     }
                 }
             }

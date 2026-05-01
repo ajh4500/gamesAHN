@@ -2,6 +2,37 @@
  * Minimax Implementation 
  * @plain javascript version
  */
+
+            function saveGameResult(result) {
+    var user = JSON.parse(localStorage.getItem("gamesbyahn_user"));
+
+    if (!user) {
+        console.log("No logged-in user. Result not saved.");
+        return;
+    }
+
+    fetch("http://localhost:5001/game-result", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            userId: user.id,
+            gameName: "connect4",
+            result: result
+        })
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        console.log("Saved Connect 4 result:", data);
+    })
+    .catch(function(error) {
+        console.error("Could not save Connect 4 result:", error);
+    });
+}
+
 function Game() {
     this.rows = 6; // Height
     this.columns = 7; // Width
@@ -198,21 +229,24 @@ Game.prototype.updateStatus = function() {
     var score = that.board.score();
 
     // Human won
-    if (score == -that.score) {
-        that.status = 1;
-        that.markWin();
-    }
+if (score == -that.score) {
+    that.status = 1;
+    saveGameResult("win");
+    that.markWin();
+}
 
-    // Computer won
-    if (score == that.score) {
-        that.status = 2;
-        that.markWin();
-    }
+// Computer won
+if (score == that.score) {
+    that.status = 2;
+    saveGameResult("loss");
+    that.markWin();
+}
 
-    // Tie
-    if (score != that.score && score != -that.score && that.board.isFull()) {
-        that.status = 3;
-    }
+// Tie
+if (score != that.score && score != -that.score && that.board.isFull()) {
+    that.status = 3;
+    saveGameResult("draw");
+}
 
     that.renderEndView();
 

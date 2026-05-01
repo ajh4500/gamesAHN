@@ -110,6 +110,37 @@ var State = function(old) {
  * Constructs a game object to be played
  * @param autoPlayer [AIPlayer] : the AI player to be play the game with
  */
+
+function saveGameResult(result) {
+    var user = JSON.parse(localStorage.getItem("gamesbyahn_user"));
+
+    if (!user) {
+        console.log("No logged-in user. Result not saved.");
+        return;
+    }
+
+    fetch("http://localhost:5001/game-result", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            userId: user.id,
+            gameName: "tictactoe",
+            result: result
+        })
+    })
+    .then(function(response) {
+        return response.json();
+    })
+    .then(function(data) {
+        console.log("Saved game result:", data);
+    })
+    .catch(function(error) {
+        console.error("Could not save game result:", error);
+    });
+}
+
 var Game = function(autoPlayer) {
 
     //public : initialize the ai player for this game
@@ -139,15 +170,19 @@ var Game = function(autoPlayer) {
         if(_state.isTerminal()) {
             this.status = "ended";
 
-            if(_state.result === "X-won")
-                //X won
-                ui.switchViewTo("won");
-            else if(_state.result === "O-won")
-                //X lost
-                ui.switchViewTo("lost");
-            else
-                //it's a draw
-                ui.switchViewTo("draw");
+            if (_state.result === "X-won") {
+    // X won
+    saveGameResult("win");
+    ui.switchViewTo("won");
+} else if (_state.result === "O-won") {
+    // X lost
+    saveGameResult("loss");
+    ui.switchViewTo("lost");
+} else {
+    // draw
+    saveGameResult("draw");
+    ui.switchViewTo("draw");
+}
         }
         else {
             //the game is still running

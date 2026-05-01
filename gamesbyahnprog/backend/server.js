@@ -79,6 +79,17 @@ db.serialize(() => {
       created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )
   `);
+
+  db.run(`
+    CREATE TABLE IF NOT EXISTS game_results (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL,
+      game_name TEXT NOT NULL,
+      result TEXT NOT NULL,
+      played_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (user_id) REFERENCES users(id)
+    )
+  `);
 });
 
 function buildUserPublic(user) {
@@ -216,6 +227,46 @@ app.post("/login", async (req, res) => {
     console.error("Login failed:", error);
     return res.status(500).json({ error: "Could not log in." });
   }
+});
+
+app.get("/stats/:userId", async (req, res) => {
+  const userId = req.params.userId;
+
+  db.all(
+    `
+    SELECT game_name, result, COUNT(*) as count
+    FROM game_results
+    WHERE user_id = ?
+    GROUP BY game_name, result
+    `,
+    [userId],
+    (err, rows) => {
+      if (err) {
+        return res.status(500).json({ error: "Could not fetch stats." });
+      }
+
+      res.json(rows);
+    }
+  );
+});
+
+        app.post("/game-result", (req, res) => {
+  const { userId, gameName, result } = req.body;
+
+  db.run(
+    `
+    INSERT INTO game_results (user_id, game_name, result)
+    VALUES (?, ?, ?)
+    `,
+    [userId, gameName, result],
+    function (err) {
+      if (err) {
+        return res.status(500).json({ error: "Could not save result." });
+      }
+
+      res.json({ success: true });
+    }
+  );
 });
 
 app.listen(PORT, () => {

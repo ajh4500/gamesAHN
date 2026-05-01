@@ -451,8 +451,9 @@ class SolitaireGame {
             this.updateScore('move', isFoundation);
             
             if (this.checkWin()) {
-                this.showWinCelebration();
-            }
+    saveGameResult("solitaire", "win");
+    this.showWinCelebration();
+}
             
             this.updateUI();
         }
@@ -474,8 +475,9 @@ class SolitaireGame {
                 if (success) {
                     this.updateScore('move', true);
                     if (this.checkWin()) {
-                        this.showWinCelebration();
-                    }
+    saveGameResult("solitaire", "win");
+    this.showWinCelebration();
+}
                     this.updateUI();
                 }
                 return success;

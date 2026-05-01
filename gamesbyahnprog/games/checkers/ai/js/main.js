@@ -33,6 +33,36 @@ const state = {
   animating: false,
 };
 
+    function saveGameResult(result) {
+  var user = JSON.parse(localStorage.getItem("gamesbyahn_user"));
+
+  if (!user) {
+    console.log("No logged-in user. Result not saved.");
+    return;
+  }
+
+  fetch("http://localhost:5001/game-result", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      userId: user.id,
+      gameName: "checkers",
+      result: result
+    })
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log("Saved Checkers result:", data);
+    })
+    .catch(function (error) {
+      console.error("Could not save Checkers result:", error);
+    });
+}
+
 function keyOf(pos) {
   return `${pos.r},${pos.c}`;
 }
@@ -200,11 +230,20 @@ function updateGameEndIfAny() {
   }
 
   state.gameOver = true;
+
+  if (winner === HUMAN) {
+    saveGameResult("win");
+  } else {
+    saveGameResult("loss");
+  }
+
   turnInfoEl.textContent = winner === HUMAN ? "Winner: Human" : "Winner: AI";
   messageEl.textContent = "Game over. Press Restart to play again.";
   showWinner(winner);
   return true;
 }
+
+  
 
 function setHumanTurnState() {
   state.turn = HUMAN;
@@ -232,14 +271,15 @@ async function playAiTurn() {
   const action = chooseBestAiAction(state.board);
 
   if (!action) {
-    state.aiThinking = false;
-    state.gameOver = true;
-    turnInfoEl.textContent = "Winner: Human";
-    messageEl.textContent = "AI has no legal moves.";
-    showWinner(HUMAN);
-    renderBoard();
-    return;
-  }
+  state.aiThinking = false;
+  state.gameOver = true;
+  saveGameResult("win");
+  turnInfoEl.textContent = "Winner: Human";
+  messageEl.textContent = "AI has no legal moves.";
+  showWinner(HUMAN);
+  renderBoard();
+  return;
+}
 
   await animateAndApplyTurnAction(action);
   state.aiThinking = false;
