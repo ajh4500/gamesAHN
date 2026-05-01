@@ -119,7 +119,7 @@ function saveGameResult(result) {
         return;
     }
 
-    fetch("http://localhost:5001/game-result", {
+    fetch("https://gamesahn.onrender.com/game-result", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
