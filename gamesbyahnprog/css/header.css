@@ -1,3 +1,13 @@
+:root {
+    --bottom-header-space: 10.5rem;
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    :root {
+        --bottom-header-space: calc(10.5rem + env(safe-area-inset-bottom));
+    }
+}
+
 header {
     position: fixed;
     top: 0;

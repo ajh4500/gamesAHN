@@ -5,6 +5,7 @@
 body {
     margin: 0;
     padding-top: 80px;
+    padding-bottom: var(--bottom-header-space);
     min-height: 100vh;
     background: #0d0e10;
     color: white;
@@ -89,6 +90,10 @@ body {
 }
 
 @media (max-width: 720px) {
+    body {
+        padding-bottom: calc(var(--bottom-header-space) + 1.5rem);
+    }
+
      #games-menu {
         min-height: auto;
         padding-top: 1.5rem;
