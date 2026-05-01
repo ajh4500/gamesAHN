@@ -98,25 +98,6 @@
                 prompt.style.transition = "";
             }
 
-            prompt.addEventListener("click", function (event) {
-                var link = event.target.closest("[data-mode-choice]");
-                if (!link) return;
-
-                event.preventDefault();
-                prompt.style.transition = "opacity 160ms ease";
-                prompt.style.opacity = "0";
-
-                window.setTimeout(function () {
-                    var targetUrl = new URL(link.getAttribute("href"), window.location.href).href.split("#")[0];
-                    var currentUrl = window.location.href.split("#")[0];
-                    if (targetUrl === currentUrl) {
-                        prompt.classList.add("is-hidden");
-                    } else {
-                        window.location.href = link.href;
-                    }
-                }, 170);
-            });
-
             document.addEventListener("click", function (event) {
                 if (event.target.closest(".restart-button")) showPrompt();
             }, true);

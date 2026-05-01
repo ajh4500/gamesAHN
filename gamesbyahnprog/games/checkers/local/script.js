@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			if(numberPiecesPlayer1 === numberPiecesPlayer2) {
 				window.alert("Game Over. It's a draw!");
 			} else if(numberPiecesPlayer1 > numberPiecesPlayer2) {
-				messageTag.textContent="Game Over. Congratulation player 1 (blue) you won!";
+				window.alert("Game Over. Congratulation player 1 (blue) you won!");
 			} else {
 				window.alert("Game Over. Congratulation player 2 (green) you won!");
 			}
